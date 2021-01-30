@@ -1,0 +1,24 @@
+#define FOREGROUND #878787
+#define BACKGROUND #353535
+#define EXTRA #55ffc5
+
+
+#define BLACK #4b5263
+#define RED #ff4c4c
+#define GREEN #34d83b
+#define YELLOW #ffe400
+#define BLUE #35a3fc
+#define MAGENTA #c250e5
+#define CYAN #05ffc5
+#define WHITE #b6d0db
+
+#define BRIGHTBLACK #4b5263
+#define BRIGHTRED #ff4c4c
+#define BRIGHTGREEN #34d83b
+#define BRIGHTYELLOW #ffe400
+#define BRIGHTBLUE #35a3fc
+#define BRIGHTMAGENTA #c250e5
+#define BRIGHTCYAN #55ffc5
+#define BRIGHTWHITE #b6d0db
+
+

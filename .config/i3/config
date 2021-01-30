@@ -1,0 +1,217 @@
+# i3 config file (v4)
+
+### setup section
+
+font pango:Noto Sans Mono 8
+
+# use 1500MW super-colliding super button
+set $mod Mod4
+
+# turn off this garbage
+focus_follows_mouse no
+
+# gaps and borders
+set $outer_gap -2
+set $inner_gap 4
+for_window [class=".*"] border pixel 2
+gaps inner $inner_gap
+gaps outer $outer_gap
+smart_borders on
+border_radius 16
+
+# window/application-specific gaps and borders
+# these seem bugged, maybe gaps can't be set here
+#for_window [class="Firefox"] gaps outer -$outer_gap
+#for_window [class="Signal"] gaps outer -$outer_gap
+
+# load colors from xrdb
+set_from_resource $fg foreground
+set_from_resource $bg background
+set_from_resource $ex extra
+
+# class                 border   backgr.  text     indic.   child_border
+client.background       $bg
+client.focused          $ex     $bg       $ex      $ex  $ex
+client.unfocused        $fg     $bg       $fg      $bg  $bg
+
+client.focused_inactive $fg      $bg      $fg      $bg      $bg
+client.urgent           $fg      $bg      $fg      $bg      $bg
+client.placeholder      $fg      $bg      $fg      $bg      $bg
+
+# float all windows by default
+for_window [class="[.]*"] floating enable
+
+# bar
+bar {
+    status_command i3status
+}
+
+# autostart shiz
+exec picom -b
+exec feh --bg-scale /usr/share/wallpaper/kasesan.png
+
+### "do stuff" section
+
+# start a terminal
+bindsym $mod+t exec i3-sensible-terminal
+
+# start rofi
+bindsym $mod+r exec --no-startup-id rofi -run-command "bash -c '{cmd}'" -show run -font "ProFont 9" 
+
+# take a screenshot
+bindsym Print exec bash -c "cd $HOME/.screenshots && scrot"
+
+# kill focused window
+bindsym $mod+q kill
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# cycle through workspaces
+bindsym $mod+Tab workspace next
+
+# split in horizontal orientation
+bindsym $mod+\ split h
+
+# split in vertical orientation
+bindsym $mod+- split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# reload the configurations for i3 and alacritty
+bindsym $mod+Shift+r reload; exec ~/.config/alacritty/load.py
+
+# focus window
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move and resize
+# hitting the combo enters a mode for positioning and resizing
+# while in thie mode, hjkl / arrows position the window, Shift+key resizes, and Mod+key reselects window
+# escape returns to default mode
+set $mvdelta 30
+set $szdelta 30
+bindsym $mod+space mode "pos"
+mode "pos" {
+    bindsym h move left $mvdelta
+    bindsym j move down $mvdelta
+    bindsym k move up $mvdelta
+    bindsym l move right $mvdelta
+    bindsym Left move left $mvdelta
+    bindsym Down move down $mvdelta
+    bindsym Up move up $mvdelta
+    bindsym Right move right $mvdelta
+    bindsym Shift+h resize shrink width $szdelta
+    bindsym Shift+l resize grow width $szdelta
+    bindsym Shift+j resize grow height $szdelta
+    bindsym Shift+k resize shrink height $szdelta
+    bindsym Shift+left resize shrink width $szdelta
+    bindsym Shift+right resize grow width $szdelta
+    bindsym Shift+down resize grow height $szdelta
+    bindsym Shift+up resize shrink height $szdelta
+    bindsym $mod+h focus left
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
+    bindsym $mod+left focus left
+    bindsym $mod+dowb focus down
+    bindsym $mod+up focus up
+    bindsym $mod+up focus up
+    bindsym Escape mode "default"
+}
+# yuoi define four sets of four workspaces for a total of 16
+# ugly but it works
+bindsym $mod+y mode "Set 1-4"
+bindsym $mod+u mode "Set 5-8"
+bindsym $mod+i mode "Set 9-12"
+bindsym $mod+o mode "Set 13-16"
+
+mode "Set 1-4" {
+    bindsym y workspace "1"; mode "default"
+    bindsym u workspace "2"; mode "default"
+    bindsym i workspace "3"; mode "default"
+    bindsym o workspace "4"; mode "default"
+    bindsym Shift+y move container to workspace "1"; mode "default"
+    bindsym Shift+u move container to workspace "2"; mode "default"
+    bindsym Shift+i move container to workspace "3"; mode "default"
+    bindsym Shift+o move container to workspace "4"; mode "default"
+    bindsym $mod+Shift+y move container to workspace "1"; workspace "1"; mode "default"
+    bindsym $mod+Shift+u move container to workspace "2"; workspace "2"; mode "default"
+    bindsym $mod+Shift+i move container to workspace "3"; workspace "3"; mode "default"
+    bindsym $mod+Shift+o move container to workspace "4"; workspace "4"; mode "default"
+    bindsym $mod+u mode "Set 5-8"
+    bindsym $mod+i mode "Set 9-12"
+    bindsym $mod+o mode "Set 13-16"
+    bindsym Escape mode "default"
+}
+
+mode "Set 5-8" {
+    bindsym y workspace "5"; mode "default"
+    bindsym u workspace "6"; mode "default"
+    bindsym i workspace "7"; mode "default"
+    bindsym o workspace "8"; mode "default"
+    bindsym Shift+y move container to workspace "5";  mode "default"
+    bindsym Shift+u move container to workspace "6"; mode "default"
+    bindsym Shift+i move container to workspace "7"; mode "default"
+    bindsym Shift+o move container to workspace "8"; mode "default"
+    bindsym $mod+Shift+y move container to workspace "5"; workspace "5"; mode "default"
+    bindsym $mod+Shift+u move container to workspace "6"; workspace "6"; mode "default"
+    bindsym $mod+Shift+i move container to workspace "7"; workspace "7"; mode "default"
+    bindsym $mod+Shift+o move container to workspace "8"; workspace "8"; mode "default"
+    bindsym $mod+y mode "Set 1-4"
+    bindsym $mod+i mode "Set 9-12"
+    bindsym $mod+o mode "Set 13-16"
+    bindsym Escape mode "default"
+}
+
+mode "Set 9-12" {
+    bindsym y workspace "9"; mode "default"
+    bindsym u workspace "10"; mode "default"
+    bindsym i workspace "11"; mode "default"
+    bindsym o workspace "12"; mode "default"
+    bindsym Shift+y move container to workspace "9"; mode "default"
+    bindsym Shift+u move container to workspace "10"; mode "default"
+    bindsym Shift+i move container to workspace "11"; mode "default"
+    bindsym Shift+o move container to workspace "12"; mode "default"
+    bindsym $mod+Shift+y move container to workspace "9";  workspace "9";   mode "default"
+    bindsym $mod+Shift+u move container to workspace "10"; workspace "10";  mode "default"
+    bindsym $mod+Shift+i move container to workspace "11"; workspace "11";  mode "default"
+    bindsym $mod+Shift+o move container to workspace "12"; workspace "12";  mode "default"
+    bindsym $mod+y mode "Set 1-4"
+    bindsym $mod+u mode "Set 5-8"
+    bindsym $mod+o mode "Set 13-16"
+    bindsym Escape mode "default"
+}
+
+mode "Set 13-16" {
+    bindsym y workspace "13"; mode "default"
+    bindsym u workspace "14"; mode "default"
+    bindsym i workspace "15"; mode "default"
+    bindsym o workspace "16"; mode "default"
+    bindsym Shift+y move container to workspace "13"; mode "default"
+    bindsym Shift+u move container to workspace "14"; mode "default"
+    bindsym Shift+i move container to workspace "15"; mode "default"
+    bindsym Shift+o move container to workspace "16"; mode "default"
+    bindsym Shift+y move container to workspace "13"; workspace "13"; mode "default"
+    bindsym Shift+u move container to workspace "14"; workspace "14"; mode "default"
+    bindsym Shift+i move container to workspace "15"; workspace "15"; mode "default"
+    bindsym Shift+o move container to workspace "16"; workspace "16"; mode "default"
+    bindsym $mod+y mode "Set 1-4"
+    bindsym $mod+u mode "Set 5-8"
+    bindsym $mod+i mode "Set 9-12"
+    bindsym Escape mode "default"
+    bindsym Escape mode "default"
+    bindsym Escape mode "default"
+    bindsym Escape mode "default"
+}
+

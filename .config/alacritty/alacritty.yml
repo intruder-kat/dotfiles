@@ -1,0 +1,28 @@
+background_opacity: 0.9
+colors:
+  bright:
+    black: '#4b5263'
+    blue: '#35a3fc'
+    cyan: '#55ffc5'
+    green: '#34d83b'
+    magenta: '#c250e5'
+    red: '#ff4c4c'
+    white: '#b6d0db'
+    yellow: '#ffe400'
+  normal:
+    black: '#4b5263'
+    blue: '#35a3fc'
+    cyan: '#05ffc5'
+    green: '#34d83b'
+    magenta: '#c250e5'
+    red: '#ff4c4c'
+    white: '#b6d0db'
+    yellow: '#ffe400'
+cursor:
+  style:
+    blinking: 'On'
+    shape: Beam
+env:
+  TERM: xterm
+font:
+  family: Noto Sans Mono

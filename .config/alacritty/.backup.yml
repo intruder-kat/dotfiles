@@ -1,0 +1,64 @@
+cursor:
+  # Cursor style
+  style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Beam
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    blinking: On
+
+  # Vi mode cursor style
+  #
+  # If the vi mode cursor style is `None` or not specified, it will fall back to
+  # the style of the active value of the normal cursor.
+  #
+  # See `cursor.style` for available options.
+  #vi_mode_style: None
+
+  # Cursor blinking interval in milliseconds.
+  #blink_interval: 750
+
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  #unfocused_hollow: true
+
+  # Thickness of the cursor relative to the cell width as floating point number
+  # from `0.0` to `1.0`.
+  #thickness: 0.15
+
+background_opacity: 0.9
+colors:
+  bright:
+    black: '#4b5263'
+    blue: '#35a3fc'
+    cyan: '#55ffc5'
+    green: '#34d83b'
+    magenta: '#c250e5'
+    red: '#ff4c4c'
+    white: '#b6d0db'
+    yellow: '#ffe400'
+  normal:
+    black: '#4b5263'
+    blue: '#35a3fc'
+    cyan: '#05ffc5'
+    green: '#34d83b'
+    magenta: '#c250e5'
+    red: '#ff4c4c'
+    white: '#b6d0db'
+    yellow: '#ffe400'
+env:
+  TERM: xterm
+font:
+  family: Noto Sans Mono
+

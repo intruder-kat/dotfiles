@@ -1,0 +1,3 @@
+directory of color definitions which can be loaded by xorg-xrdb
+the "isaac" def is colors I stole from https://github.com/isaacmorneau/dotfiles to test this config
+
