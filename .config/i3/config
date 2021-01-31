@@ -11,44 +11,36 @@ set $mod Mod4
 focus_follows_mouse no
 
 # gaps and borders
-set $outer_gap -2
-set $inner_gap 4
-for_window [class=".*"] border pixel 2
+# gaps get configured from .Xresources so that other things can reference our gaps
+set_from_resource $outer_gap outergap
+set_from_resource $inner_gap innergap
+
+for_window [class=".*"] border pixel 1
 gaps inner $inner_gap
 gaps outer $outer_gap
-smart_borders on
 border_radius 16
-
-# window/application-specific gaps and borders
-# these seem bugged, maybe gaps can't be set here
-#for_window [class="Firefox"] gaps outer -$outer_gap
-#for_window [class="Signal"] gaps outer -$outer_gap
 
 # load colors from xrdb
 set_from_resource $fg foreground
 set_from_resource $bg background
 set_from_resource $ex extra
-
+set_from_resource $al color1
 # class                 border   backgr.  text     indic.   child_border
 client.background       $bg
-client.focused          $ex     $bg       $ex      $ex  $ex
-client.unfocused        $fg     $bg       $fg      $bg  $bg
+client.focused          $fg      $bg      $ex      $ex      $ex
+client.unfocused        $fg      $bg      $fg      $bg      $bg
 
 client.focused_inactive $fg      $bg      $fg      $bg      $bg
 client.urgent           $fg      $bg      $fg      $bg      $bg
 client.placeholder      $fg      $bg      $fg      $bg      $bg
 
-# float all windows by default
-for_window [class="[.]*"] floating enable
-
-# bar
-bar {
-    status_command i3status
-}
+# uncomment to float all windows by default
+#for_window [class="[.]*"] floating enable
 
 # autostart shiz
-exec picom -b
-exec feh --bg-scale /usr/share/wallpaper/kasesan.png
+exec --no-startup-id picom -b
+exec --no-startup-id feh --bg-scale /usr/share/wallpaper/kasesan.png
+exec --no-startup-id ~/.config/polybar/launch.sh
 
 ### "do stuff" section
 
@@ -83,7 +75,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+space floating toggle
 
 # reload the configurations for i3 and alacritty
-bindsym $mod+Shift+r reload; exec ~/.config/alacritty/load.py
+bindsym $mod+Shift+r exec ~/.config/alacritty/load.py; exec ~/.config/polybar/launch.sh; reload
 
 # focus window
 bindsym $mod+h focus left
@@ -94,6 +86,9 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+# focus between floating and tiling
+bindsyn $mod+semicolon focus mode_toggle
 
 # move and resize
 # hitting the combo enters a mode for positioning and resizing
@@ -128,6 +123,7 @@ mode "pos" {
     bindsym $mod+up focus up
     bindsym $mod+up focus up
     bindsym Escape mode "default"
+    bindsym $mod+Shift+space floating toggle
 }
 # yuoi define four sets of four workspaces for a total of 16
 # ugly but it works
@@ -153,6 +149,7 @@ mode "Set 1-4" {
     bindsym $mod+i mode "Set 9-12"
     bindsym $mod+o mode "Set 13-16"
     bindsym Escape mode "default"
+    bindsym $mod+Shift+space floating toggle
 }
 
 mode "Set 5-8" {
@@ -172,6 +169,7 @@ mode "Set 5-8" {
     bindsym $mod+i mode "Set 9-12"
     bindsym $mod+o mode "Set 13-16"
     bindsym Escape mode "default"
+    bindsym $mod+Shift+space floating toggle
 }
 
 mode "Set 9-12" {
@@ -191,6 +189,7 @@ mode "Set 9-12" {
     bindsym $mod+u mode "Set 5-8"
     bindsym $mod+o mode "Set 13-16"
     bindsym Escape mode "default"
+    bindsym $mod+Shift+space floating toggle
 }
 
 mode "Set 13-16" {
@@ -213,5 +212,6 @@ mode "Set 13-16" {
     bindsym Escape mode "default"
     bindsym Escape mode "default"
     bindsym Escape mode "default"
+    bindsym $mod+Shift+space floating toggle
 }
 

@@ -23,6 +23,6 @@ cursor:
     blinking: 'On'
     shape: Beam
 env:
-  TERM: xterm
+  TERM: xterm-256color
 font:
   family: Noto Sans Mono
