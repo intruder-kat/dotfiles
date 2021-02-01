@@ -1,0 +1,27 @@
+#include "/home/katy/.xcolors/isaac"
+
+*.outergap: -2
+*.innergap: 4
+
+*.foreground: FOREGROUND
+*.background: BACKGROUND
+*.extra: EXTRA
+
+*.color0: BLACK
+*.color1: RED
+*.color2: GREEN
+*.color3: YELLOW
+*.color4: BLUE
+*.color5: MAGENTA
+*.color6: CYAN
+*.color7: WHITE
+
+*.color8:  BRIGHTBLACK
+*.color9:  BRIGHTRED
+*.color10: BRIGHTGREEN
+*.color11: BRIGHTYELLOW
+*.color12: BRIGHTBLUE
+*.color13: BRIGHTMAGENTA
+*.color14: BRIGHTCYAN
+*.color15: BRIGHTWHITE
+
